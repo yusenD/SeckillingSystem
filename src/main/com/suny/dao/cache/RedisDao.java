@@ -1,9 +1,9 @@
-package com.suny.dao.cache;
+package main.com.suny.dao.cache;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
-import com.suny.entity.Seckill;
+import main.com.suny.entity.Seckill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;

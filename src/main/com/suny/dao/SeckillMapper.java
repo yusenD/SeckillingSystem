@@ -1,6 +1,6 @@
-package com.suny.dao;
+package main.com.suny.dao;
 
-import com.suny.entity.Seckill;
+import main.com.suny.entity.Seckill;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;

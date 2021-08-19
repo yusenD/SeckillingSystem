@@ -1,6 +1,6 @@
-package com.suny.dao;
+package main.com.suny.dao;
 
-import com.suny.entity.SuccessKilled;
+import main.com.suny.entity.SuccessKilled;
 import org.apache.ibatis.annotations.Param;
 
 /**

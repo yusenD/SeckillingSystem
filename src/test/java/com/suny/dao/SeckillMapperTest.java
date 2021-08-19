@@ -1,6 +1,6 @@
 package com.suny.dao;
 
-import com.suny.entity.Seckill;
+import main.com.suny.entity.Seckill;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

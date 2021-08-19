@@ -46,7 +46,7 @@
     </bean>
 
     <!--注入redisDao-->
-    <bean id="redisDao" class="com.suny.dao.cache.RedisDao">
+    <bean id="redisDao" class="main.com.suny.dao.cache.RedisDao">
         <!--构造方法注入值-->
         <constructor-arg index="0" value="localhost"/>
         <constructor-arg index="1" value="6379"/>

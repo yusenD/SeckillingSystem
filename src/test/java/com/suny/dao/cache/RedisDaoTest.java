@@ -1,7 +1,7 @@
 package com.suny.dao.cache;
 
-import com.suny.dao.SeckillMapper;
-import com.suny.entity.Seckill;
+import main.com.suny.dao.SeckillMapper;
+import main.com.suny.entity.Seckill;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

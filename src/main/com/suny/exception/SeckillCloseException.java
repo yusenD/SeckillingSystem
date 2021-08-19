@@ -1,4 +1,4 @@
-package com.suny.exception;
+package main.com.suny.exception;
 
 /**
  * 秒杀已经关闭异常，当秒杀结束就会出现这个异常

@@ -1,4 +1,4 @@
-package com.suny.dto;
+package main.com.suny.dto;
 
 import java.time.LocalDateTime;
 

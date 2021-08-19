@@ -1,4 +1,4 @@
-package com.suny.dto;
+package main.com.suny.dto;
 
 /**
  * 封装所有的ajax请求返回类型，方便返回json

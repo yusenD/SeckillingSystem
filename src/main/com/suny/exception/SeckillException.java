@@ -1,4 +1,4 @@
-package com.suny.exception;
+package main.com.suny.exception;
 
 /**
  *  秒杀基础异常

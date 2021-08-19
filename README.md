@@ -511,7 +511,7 @@ public class Seckill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.suny.entity.Seckill{" +
+        return "Seckill{" +
                 "主键ID=" + seckillId +
                 ", 秒杀商品='" + name + '\'' +
                 ", 编号=" + number +
@@ -526,10 +526,11 @@ public class Seckill implements Serializable {
 ```
  #### 对实体类创建对应的`mapper`接口,也就是`dao`接口类
  - 首先创建`SeckillMapper`,在我这里位于`com.suny.dao`包下
+
  ```java
 package com.suny.dao;
 
-import com.suny.entity.Seckill;
+import Seckill;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
@@ -541,7 +542,7 @@ public interface SeckillMapper {
      *
      * @param seckillId 秒杀商品ID
      * @param killTime  秒杀的精确时间
-     * @return 如果秒杀成功就返回1,否则就返回0
+     * @return 如果秒杀成功就返回1, 否则就返回0
      */
     int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") LocalDateTime killTime);
 
@@ -565,10 +566,11 @@ public interface SeckillMapper {
 
 ```
  - 再创建`SuccessKilledMapper`
+
  ```java
 package com.suny.dao;
 
-import com.suny.entity.SuccessKilled;
+import SuccessKilled;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -599,36 +601,37 @@ public interface SuccessKilledMapper {
 首先在`src/main/resources`建立`com.suny.dao`这个包,也就是对应`mapper`接口文件包一样的包名,这样符合Maven的约定,就是资源放置在`Resource`包下,`Java`包下则是放置`java`类文件,编译后最后还是会在同一个目录下.  
 ![建包](images/004.png)
 - 首先建立`SeckillMapper.xml`
+
 ```xml
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.suny.dao.SeckillMapper">
+<mapper namespace="main.com.suny.dao.SeckillMapper">
     <!--这里的<=需要使用进行忽略,所以是要进行忽略,使用CDATA 区段中的文本会被解析器忽略 -->
     <update id="reduceNumber">
         UPDATE seckill
         SET number = number - 1
         WHERE seckill_id = #{seckillId}
-              AND start_time 
-              <![CDATA[
+        AND start_time
+        <![CDATA[
               <=
               ]]>
-         #{killTime}
-              AND end_time >= #{killTime}
-              AND number > 0
+        #{killTime}
+        AND end_time >= #{killTime}
+        AND number > 0
     </update>
 
-    <select id="queryById" resultType="com.suny.entity.Seckill">
+    <select id="queryById" resultType="main.com.suny.entity.Seckill">
         SELECT
-            *
+        *
         FROM seckill AS s
         WHERE s.seckill_id = #{seckillId}
     </select>
 
 
-    <select id="queryAll" resultType="com.suny.entity.Seckill">
+    <select id="queryAll" resultType="main.com.suny.entity.Seckill">
         SELECT
-            *
+        *
         FROM seckill AS s
         ORDER BY create_time DESC
         LIMIT #{offset}, #{limit}
@@ -636,38 +639,39 @@ public interface SuccessKilledMapper {
 </mapper>
 ```
 - 建立`SuccessKilledMapper.xml`
+
 ```xml
 
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.suny.dao.SuccessKilledMapper">
-    <!--添加主键冲突时忽略错误返回0-->  
+<mapper namespace="main.com.suny.dao.SuccessKilledMapper">
+    <!--添加主键冲突时忽略错误返回0-->
     <insert id="insertSuccessKilled">
         INSERT IGNORE INTO success_killed (seckill_id, user_phone, state)
         VALUES (#{seckillId}, #{userPhone}, 0)
     </insert>
-    <!--根据seckillId查询SuccessKilled对象,并携带Seckill对象,告诉mybatis把映射结果映射到SuccessKill属性同时映射到Seckill属性-->  
-    <select id="queryByIdWithSeckill" resultType="com.suny.entity.SuccessKilled">
+    <!--根据seckillId查询SuccessKilled对象,并携带Seckill对象,告诉mybatis把映射结果映射到SuccessKill属性同时映射到Seckill属性-->
+    <select id="queryByIdWithSeckill" resultType="main.com.suny.entity.SuccessKilled">
         SELECT
-            sk.seckill_id,
-            sk.user_phone,
-            sk.create_time,
-            sk.state,
-            s.seckill_id  "seckill.seckill_id",
-            s.name "seckill.name",
-            s.number "seckill",
-            s.start_time  "seckill.start_time",
-            s.end_time  "seckill.end_time",
-            s.create_time "seckill.create_time"
+        sk.seckill_id,
+        sk.user_phone,
+        sk.create_time,
+        sk.state,
+        s.seckill_id "seckill.seckill_id",
+        s.name "seckill.name",
+        s.number "seckill",
+        s.start_time "seckill.start_time",
+        s.end_time "seckill.end_time",
+        s.create_time "seckill.create_time"
         FROM success_killed sk
-            INNER JOIN seckill s ON sk.seckill_id = s.seckill_id
+        INNER JOIN seckill s ON sk.seckill_id = s.seckill_id
         WHERE sk.seckill_id = #{seckillId}
-              AND sk.user_phone= #{userPhone}
+        AND sk.user_phone= #{userPhone}
     </select>
 
-</mapper>  
-  
+</mapper>
+
 ```
 - 建立`Mybatis`的配置文件`mybatis-config.xml`
 ```xml
@@ -750,10 +754,11 @@ jdbc.url=jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=u
 - 基础的部分我们搭建完成了,然后要开始测试了
  在`IDEA`里面有一个快速建立测试的快捷键`Ctrl+Shift+T`,在某个要测试的类里面按下这个快捷键就会出现`Create new Test`,然后选择你要测试的方法跟测试的工具就可以了,这里我们使用Junit作为测试
   + 建立`SeckillMapperTest`文件,代码如下
+
  ```java
 package com.suny.dao;
 
-import com.suny.entity.Seckill;
+import Seckill;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -775,8 +780,8 @@ public class SeckillMapperTest {
 
     @Test
     public void reduceNumber() throws Exception {
-        long seckillId=1000;
-        LocalDateTime localDateTime=LocalDateTime.now();
+        long seckillId = 1000;
+        LocalDateTime localDateTime = LocalDateTime.now();
         int i = seckillMapper.reduceNumber(seckillId, localDateTime);
         System.out.println(i);
     }
@@ -2217,13 +2222,14 @@ public class RedisDao {
 ````
 
 + 下一步是在在`applicationContext-dao.xml`中注入`redisDao`
+
 ```xml
  <!--注入redisDao-->
-    <bean id="redisDao" class="com.suny.dao.cache.RedisDao">
-        <!--构造方法注入值-->
-        <constructor-arg index="0" value="localhost"/>
-        <constructor-arg index="1" value="6379"/>
-    </bean>
+<bean id="redisDao" class="main.com.suny.dao.cache.RedisDao">
+    <!--构造方法注入值-->
+    <constructor-arg index="0" value="localhost"/>
+    <constructor-arg index="1" value="6379"/>
+</bean>
 ```
 + 改造`exportSeckillUrl`方法,一定要先注入`redisDao`
 ```java

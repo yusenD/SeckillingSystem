@@ -1,4 +1,4 @@
-package com.suny.enums;
+package main.com.suny.enums;
 
 /**
  * 常量枚举类

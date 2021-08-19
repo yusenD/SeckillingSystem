@@ -1,14 +1,14 @@
-package com.suny.controller;
+package main.com.suny.controller;
 
-import com.suny.dto.Exposer;
-import com.suny.dto.SeckillExecution;
-import com.suny.dto.SeckillResult;
-import com.suny.entity.Seckill;
-import com.suny.enums.SeckillStatEnum;
-import com.suny.exception.RepeatKillException;
-import com.suny.exception.SeckillCloseException;
-import com.suny.exception.SeckillException;
-import com.suny.service.interfaces.SeckillService;
+import main.com.suny.dto.Exposer;
+import main.com.suny.dto.SeckillExecution;
+import main.com.suny.dto.SeckillResult;
+import main.com.suny.entity.Seckill;
+import main.com.suny.enums.SeckillStatEnum;
+import main.com.suny.exception.RepeatKillException;
+import main.com.suny.exception.SeckillCloseException;
+import main.com.suny.exception.SeckillException;
+import main.com.suny.service.interfaces.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package com.suny.dto;
+package main.com.suny.dto;
 
-import com.suny.entity.SuccessKilled;
-import com.suny.enums.SeckillStatEnum;
+import main.com.suny.entity.SuccessKilled;
+import main.com.suny.enums.SeckillStatEnum;
 
 /**
  * 封装秒杀后的结果,是否秒杀成功

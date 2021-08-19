@@ -1,12 +1,11 @@
 package com.suny.service;
 
-import com.suny.dto.Exposer;
-import com.suny.dto.SeckillExecution;
-import com.suny.entity.Seckill;
-import com.suny.exception.RepeatKillException;
-import com.suny.exception.SeckillCloseException;
-import com.suny.exception.SeckillException;
-import com.suny.service.interfaces.SeckillService;
+import main.com.suny.dto.Exposer;
+import main.com.suny.dto.SeckillExecution;
+import main.com.suny.entity.Seckill;
+import main.com.suny.exception.RepeatKillException;
+import main.com.suny.exception.SeckillCloseException;
+import main.com.suny.service.interfaces.SeckillService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

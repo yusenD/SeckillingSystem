@@ -1,4 +1,4 @@
-package com.suny.entity;
+package main.com.suny.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
