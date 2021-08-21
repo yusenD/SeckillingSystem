@@ -42,8 +42,7 @@ public class OrderServiceImpl implements OrderService {
         //扣库存
         saleStock(stock);
         //创建订单
-        int id = createOrder(stock);
-        return id;
+        return createOrder(stock);
     }
 
     @Override
@@ -92,14 +91,14 @@ public class OrderServiceImpl implements OrderService {
         if (user == null) {
             throw new Exception("用户不存在");
         }
-        LOGGER.info("用户信息验证成功：[{}]", user.toString());
+        LOGGER.info("用户信息验证成功：[{}]", user);
 
         // 检查商品合法性
         Stock stock = stockService.getStockById(sid);
         if (stock == null) {
             throw new Exception("商品不存在");
         }
-        LOGGER.info("商品信息验证成功：[{}]", stock.toString());
+        LOGGER.info("商品信息验证成功：[{}]", stock);
 
         //乐观锁更新库存
         boolean success = saleStockOptimistic(stock);
@@ -150,7 +149,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Boolean checkUserOrderInfoInCache(Integer sid, Integer userId) throws Exception {
+    public Boolean checkUserOrderInfoInCache(Integer sid, Integer userId) {
         String key = CacheKey.USER_HAS_ORDER.getKey() + "_" + sid;
         LOGGER.info("检查用户Id：[{}] 是否抢购过商品Id：[{}] 检查Key：[{}]", userId, sid, key);
         return stringRedisTemplate.opsForSet().isMember(key, userId.toString());

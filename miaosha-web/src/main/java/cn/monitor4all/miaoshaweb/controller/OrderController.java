@@ -48,7 +48,7 @@ public class OrderController {
     @RequestMapping("/createWrongOrder/{sid}")
     @ResponseBody
     public String createWrongOrder(@PathVariable int sid) {
-        int id = 0;
+        int id = -1;
         try {
             id = orderService.createWrongOrder(sid);
             LOGGER.info("创建订单id: [{}]", id);
