@@ -10,7 +10,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.monitor4all</groupId>
+    <groupId>com.luyuan</groupId>
     <artifactId>miaosha</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>miaosha</name>
