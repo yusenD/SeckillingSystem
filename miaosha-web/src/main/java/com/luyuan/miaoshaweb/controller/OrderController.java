@@ -67,12 +67,12 @@ public class OrderController {
     @ResponseBody
     public String createOptimisticOrder(@PathVariable int sid) {
         // 1. 阻塞式获取令牌
-        LOGGER.info("等待时间" + rateLimiter.acquire());
+//        LOGGER.info("等待时间" + rateLimiter.acquire());
         // 2. 非阻塞式获取令牌
-//        if (!rateLimiter.tryAcquire(1000, TimeUnit.MILLISECONDS)) {
-//            LOGGER.warn("你被限流了，真不幸，直接返回失败");
-//            return "你被限流了，真不幸，直接返回失败";
-//        }
+        if (!rateLimiter.tryAcquire(1000, TimeUnit.MILLISECONDS)) {
+            LOGGER.warn("你被限流了，真不幸，直接返回失败");
+            return "你被限流了，真不幸，直接返回失败";
+        }
         int id;
         try {
             id = orderService.createOptimisticOrder(sid);
